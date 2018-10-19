@@ -20,6 +20,7 @@
 # Ignore uploaded files in development
 /storage/*
 !/storage/.keep
+/app/keys.rb
 
 /node_modules
 /yarn-error.log
@@ -33,4 +34,4 @@
 
 # Ignore application configuration
 /config/application.yml
-/app/keys.rb
+
