@@ -23,9 +23,13 @@ ActiveRecord::Schema.define(version: 2018_10_19_194850) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "userpoliticians", force: :cascade do |t|
+  create_table "user_politicians", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "politician_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["politician_id"], name: "index_user_politicians_on_politician_id"
+    t.index ["user_id"], name: "index_user_politicians_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -33,6 +37,9 @@ ActiveRecord::Schema.define(version: 2018_10_19_194850) do
     t.string "email"
     t.string "password"
     t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
