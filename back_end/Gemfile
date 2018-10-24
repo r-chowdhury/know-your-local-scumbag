@@ -8,6 +8,8 @@ gem "json"
 gem 'figaro'
 gem 'pg'
 gem 'rails_12factor', group: :production
+gem 'rack-cors'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.1'
 # Use Puma as the app server

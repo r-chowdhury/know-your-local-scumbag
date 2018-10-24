@@ -1,0 +1,2 @@
+module UserPoliticianHelper
+end
