@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'; /* code change */
-import {displayUsers} from './actions/userActions'
-import {displayPoliticians} from './actions/politicianActions'
+import LoginPage from "./components/LoginPage"
 
 class App extends Component {
   constructor() {
@@ -10,69 +9,37 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    fetch("http://localhost:3000/users")
-    .then(resp => resp.json())
-    .then(data => {
-      this.props.getUsers(data)
-    })
     
-    fetch("http://localhost:3000/politicians")
-    .then(resp => resp.json())
-    .then(politicians => {
-      this.props.getPoliticians(politicians)
-    })
-
-    fetch("http://localhost:3000/user_politicians")
-    .then(resp => resp.json())
-    .then(userPoliticians => {
-      let politician_ids = userPoliticians.map(userPolitician => {
-        return userPolitician.politician_id
+    fetch('http://localhost:3000/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user: {
+          name: "guy fieri",
+          email: 'guy@email.com',
+          password: 'hi',
+          address: "13531 Naples Bridge Road",
+          city: "Sugar Land",
+          state: "Texas",
+          zip: "77478"
+        }
       })
-
-      
     })
+      .then(r => r.json())
+      .then(data => console.log(data))
+
   }
-
-  renderNames = () =>{
-    let users = this.props.users
-    
-    return users.map(user =>{
-      return (
-        <React.Fragment>
-          <h1>{user.name}</h1>
-        </React.Fragment> 
-      )
-    })
-   }
 
 
   render() {
-    console.log(this.props.politicians)
-    if (this.props.users.length > 0) {
-      return (
-        <div>
-          {this.renderNames()}
-        </div>
-      )  
-    } else {
-      return (<p>Loading...</p>);
-    }
+    return(
+      <LoginPage />
+    )
+    
   }
 
 }
 
-function mapStateToProps(state){
-  debugger
-  return {
-    users: state.users.users,
-    politicians: state.politicians.politicians
-  }
-}
-
-function mapDispatchToProps(dispatch){
-  return {
-    getUsers: (users) => dispatch(displayUsers(users)),
-    getPoliticians: (politicians) => dispatch(displayPoliticians(politicians))
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App

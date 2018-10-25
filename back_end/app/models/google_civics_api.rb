@@ -18,10 +18,17 @@ class GoogleCivicsApi
       
       officials_object_array = parsed_data["officials"]
       politician_instance_array = officials_object_array.map do |official|  
+        politician_parameters = ["name", "address", "party"]
+        politician_parameters.each do |parameter|
+          if official[parameter] == nil
+            official[parameter] = "Unknown"
+          end
+        end
         x = Politician.find_or_create_by(name: official["name"], address: official["address"][0]["line1"], party: official["party"])
         y = UserPolitician.create(politician_id: x.id, user_id: user.id)
       end 
     end 
   end 
+
 
 end 
