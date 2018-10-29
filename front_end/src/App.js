@@ -1,42 +1,52 @@
 import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux'; /* code change */
+import HomePage from "./components/HomePage"
 import LoginPage from "./components/LoginPage"
+import SignUpPage from "./components/SignUpPage"
+import PoliticianList from "./components/PoliticianList"
 
 class App extends Component {
   constructor() {
     super()
-    this.state = {}
+    this.state = {
+      isLoggingIn: false,
+      isSigningUp: false,
+      isLoggedIn: false,
+    }
   }
 
-  componentDidMount = () => {
-    
-    fetch('http://localhost:3000/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        user: {
-          name: "guy fieri",
-          email: 'guy@email.com',
-          password: 'hi',
-          address: "13531 Naples Bridge Road",
-          city: "Sugar Land",
-          state: "Texas",
-          zip: "77478"
-        }
+  handleClick = (e) => {
+    if (e.target.innerHTML === "Create An Account") {
+      this.setState({
+        isSigningUp: !this.state.isSigningUp
       })
-    })
-      .then(r => r.json())
-      .then(data => console.log(data))
-
+    } else {
+      this.setState({
+        isLoggingIn: !this.state.isLoggingIn
+      })
+    }
   }
 
+  changeLoginState = () => {
+    this.setState({
+      isLoggedIn: !this.state.isLoggedIn,
+      isLoggingIn: !this.state.isLoggingIn
+    }, console.log)
+  }
 
   render() {
-    return(
-      <LoginPage />
-    )
+    if (this.state.isLoggingIn === false && this.state.isSigningUp === false && this.state.isLoggedIn === false) {
+      return (
+        <div>
+          <HomePage handleClick={this.handleClick}/>
+        </div>
+      )
+    } else if (this.state.isLoggingIn === true && this.state.isSigningUp === false) {
+      return (<LoginPage changeLoginState={this.changeLoginState}/>)
+    } else if (this.state.isSigningUp === true && this.state.isLoggingIn === false) {
+      return (<SignUpPage />)
+    } else if (this.state.isLoggedIn === true) {
+      return (<PoliticianList userPoliticianList={this.state.userPoliticianList}/>)
+    }
     
   }
 
