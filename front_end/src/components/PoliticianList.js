@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Politician from "./Politician"
 
- class PoliticianList extends Component {
+class PoliticianList extends Component {
    constructor() {
      super() 
      this.state = {
@@ -32,6 +32,10 @@ import Politician from "./Politician"
     return politicianList.map(user_politician => {
       return <Politician politician={user_politician.politician} user={user_politician.user}/>
     })
+  }
+
+  displayNavBar = () => {
+
   }
 
   render() {

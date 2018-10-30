@@ -3,6 +3,7 @@ import HomePage from "./components/HomePage"
 import LoginPage from "./components/LoginPage"
 import SignUpPage from "./components/SignUpPage"
 import PoliticianList from "./components/PoliticianList"
+import PoliticianListAppBar from "./components/PoliticianListAppBar"
 
 class App extends Component {
   constructor() {
@@ -33,6 +34,12 @@ class App extends Component {
     }, console.log)
   }
 
+  logOutClick = () => {
+    this.setState({
+      isLoggedIn: !this.state.isLoggedIn
+    })
+  }
+
   render() {
     if (this.state.isLoggingIn === false && this.state.isSigningUp === false && this.state.isLoggedIn === false) {
       return (
@@ -45,8 +52,12 @@ class App extends Component {
     } else if (this.state.isSigningUp === true && this.state.isLoggingIn === false) {
       return (<SignUpPage />)
     } else if (this.state.isLoggedIn === true && !!localStorage.token === true) {
-      return (<PoliticianList userPoliticianList={this.state.userPoliticianList}/>)
-    }
+      return (
+        <div>
+          <PoliticianListAppBar logoutClick={this.logoutClick}/>
+          <PoliticianList userPoliticianList={this.state.userPoliticianList}/>)
+        </div>
+      )}
     
   }
 
