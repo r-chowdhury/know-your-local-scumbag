@@ -44,7 +44,7 @@ class App extends Component {
       return (<LoginPage changeLoginState={this.changeLoginState}/>)
     } else if (this.state.isSigningUp === true && this.state.isLoggingIn === false) {
       return (<SignUpPage />)
-    } else if (this.state.isLoggedIn === true) {
+    } else if (this.state.isLoggedIn === true && !!localStorage.token === true) {
       return (<PoliticianList userPoliticianList={this.state.userPoliticianList}/>)
     }
     
