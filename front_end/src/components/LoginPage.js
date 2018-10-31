@@ -67,7 +67,7 @@ const LoginPage = (props) => {
     })
       .then(resp => resp.json())
       .then(data_with_token => {
-        console.log(data_with_token)
+        console.log('AFTER LOGIN', data_with_token.user.name, data_with_token.user.id)
         if (!!data_with_token.jwt) {
           localStorage.name = data_with_token.user.name
           localStorage.user_id = data_with_token.user.id

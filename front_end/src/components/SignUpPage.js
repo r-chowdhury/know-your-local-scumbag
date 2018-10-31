@@ -41,11 +41,12 @@ const styles = theme => ({
   },
 });
 
-function SignUp(props) {
+function SignUpPage(props) {
   const { classes } = props;
 
   const createUserProfile = e => {
     e.preventDefault()
+    const name = e.target[0].value
     fetch("http://localhost:3000/users", {
       method: "POST",
       headers: {
@@ -64,6 +65,12 @@ function SignUp(props) {
         }
       })
     })
+    .then(resp => resp.json())
+    .then(signedUpUser => {
+      console.log('AFTER SIGNUP', name, signedUpUser.user.id)
+      props.changeIsSignedUp(name, signedUpUser.user.id)
+    })
+
   }
 
 
@@ -151,8 +158,8 @@ function SignUp(props) {
   );
 }
 
-SignUp.propTypes = {
+SignUpPage.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SignUp);
+export default withStyles(styles)(SignUpPage);
