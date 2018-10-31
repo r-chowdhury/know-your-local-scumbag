@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import HomePage from "./components/HomePage"
 import LoginPage from "./components/LoginPage"
 import SignUpPage from "./components/SignUpPage"
@@ -38,6 +38,7 @@ class App extends Component {
     this.setState({
       isLoggedIn: !this.state.isLoggedIn
     })
+    localStorage.name = undefined
   }
 
   render() {
@@ -54,8 +55,8 @@ class App extends Component {
     } else if (this.state.isLoggedIn === true && !!localStorage.token === true) {
       return (
         <div>
-          <PoliticianListAppBar logoutClick={this.logoutClick}/>
-          <PoliticianList userPoliticianList={this.state.userPoliticianList}/>)
+          <PoliticianListAppBar logOutClick={this.logOutClick}/>
+          <PoliticianList userPoliticianList={this.state.userPoliticianList}/>
         </div>
       )}
     

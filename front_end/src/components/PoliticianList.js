@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import Politician from "./Politician"
 
 class PoliticianList extends Component {
    constructor() {
      super() 
      this.state = {
-       filteredPoliticianList: []
+       filteredPoliticianList: [],
+       isLoaded: false
      }
    }
 
@@ -26,7 +27,10 @@ class PoliticianList extends Component {
           filteredPoliticianList: x
         })
       })
-    }
+    this.setState({
+      isLoaded: !this.state.isLoaded
+    })
+  }
   
   displayPolitician = (politicianList) => {
     return politicianList.map(user_politician => {
@@ -34,21 +38,33 @@ class PoliticianList extends Component {
     })
   }
 
-  displayNavBar = () => {
-
+  pageHeader = () => {
+    return (
+      <React.Fragment>
+        <h1>Welcome {localStorage.name}</h1>
+        <h2>Here's a list of your elected officials: </h2>
+      </React.Fragment>
+    )
   }
 
   render() {
-    return (
-      <div>
-        <h1>Welcome {localStorage.name}</h1>
-        <h2>Here's a list of your elected officials: </h2>
-        <ul>
-          {this.displayPolitician(this.state.filteredPoliticianList)}
-        </ul>
-      </div>
-    )
-  }
+    if (this.state.isLoaded === false) {
+      return (
+        <div>
+          {this.pageHeader()}
+          <p>Loading...</p>
+        </div>
+      )
+    } else { 
+      return (
+        <div>
+          {this.pageHeader()}
+          <ul>
+            {this.displayPolitician(this.state.filteredPoliticianList)}
+          </ul>
+        </div>
+      )}
+    }
 }
 
 export default PoliticianList

@@ -34,7 +34,7 @@ const Politician = (props) => {
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </div>
-  );
+  )
 }
 
 Politician.propTypes = {

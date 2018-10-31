@@ -20,7 +20,6 @@ const styles = {
 };
 
 class PoliticianListAppBar extends Component {
-
   render() {
     return (
       <div className={this.props.classes.root}>
