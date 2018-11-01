@@ -26,8 +26,8 @@ const Politician = (props) => {
           <Typography className={classes.heading}>{props.politician.name} - {props.politician.position} </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <img src={props.politician.photo_url} class="Profile-image" alt="Profile image" height="300" width="300"/>
             <Typography>
+            <img src={props.politician.photo_url} class="Profile-image" alt="Profile image" height="300" width="300"/>
               <li>Address: {props.politician.address}</li>
               <li>Politicial Affiliation: {props.politician.party}</li>
             </Typography>
