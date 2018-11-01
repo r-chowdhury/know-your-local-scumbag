@@ -12,18 +12,21 @@ class App extends Component {
       isLoggingIn: false,
       isSigningUp: false,
       isLoggedIn: false,
-      isSignedUp: false
     }
   }
 
   handleClick = (e) => {
     if (e.target.innerHTML === "Create An Account") {
       this.setState({
-        isSigningUp: !this.state.isSigningUp
+        isSigningUp: true,
+        isLoggingIn: false,
+        isLoggedIn: false
       })
     } else {
       this.setState({
-        isLoggingIn: !this.state.isLoggingIn
+        isLoggingIn: true,
+        isLoggedIn: false,
+        isSigningUp: false
       })
     }
   }
@@ -37,23 +40,24 @@ class App extends Component {
 
   logOutClick = () => {
     this.setState({
-      isLoggedIn: false
+      isLoggingIn: false,
+      isSigningUp: false,
+      isLoggedIn: false,
     })
   }
 
   changeIsSignedUp = (name, id) => {
-    console.log('CHANGE IS SIGNED UP')
     localStorage.user_id = id
     localStorage.name = name
     this.setState({
       isSigningUp: false,
-      isSignedUp: true
+      isLoggedIn: true
     })
 
   }
 
   render() {
-    if (this.state.isLoggingIn === false && this.state.isSigningUp === false && this.state.isLoggedIn === false && this.state.isSignedUp === false) {
+    if (this.state.isLoggingIn === false && this.state.isSigningUp === false && this.state.isLoggedIn === false) {
       return (
         <div>
           <HomePage handleClick={this.handleClick}/>
@@ -63,7 +67,7 @@ class App extends Component {
       return (<LoginPage changeLoginState={this.changeLoginState}/>)
     } else if (this.state.isSigningUp === true && this.state.isLoggingIn === false) {
       return (<SignUpPage changeIsSignedUp={this.changeIsSignedUp}/>)
-    } else if ((this.state.isLoggedIn === true && !!localStorage.token === true) || this.state.isSignedUp === true)  {
+    } else if (this.state.isLoggedIn === true && !!localStorage.token === true)  {
       return (
         <div>
           <PoliticianListAppBar logOutClick={this.logOutClick}/>

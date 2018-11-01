@@ -67,7 +67,7 @@ function SignUpPage(props) {
     })
     .then(resp => resp.json())
     .then(signedUpUser => {
-      console.log('AFTER SIGNUP', name, signedUpUser.user.id)
+      localStorage.token = signedUpUser.jwt
       props.changeIsSignedUp(name, signedUpUser.user.id)
     })
 

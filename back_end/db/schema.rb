@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2018_10_19_194850) do
     t.string "address"
     t.string "party"
     t.string "photo_url"
+    t.string "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
