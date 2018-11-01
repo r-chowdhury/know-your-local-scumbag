@@ -14,8 +14,8 @@ class UsersController < ApplicationController
     else
       render json: { error: 'failed to create user' }, status: :not_acceptable
     end
-
-    GoogleCivicsApi.get_officials(current_user)
+    byebug
+    GoogleCivicsApi.get_officials(@user)
   end
 
   def index 

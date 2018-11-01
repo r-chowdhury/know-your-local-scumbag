@@ -23,7 +23,7 @@ const Politician = (props) => {
     <div className={classes.root}>
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes.heading}>{props.politician.name}</Typography>
+          <Typography className={classes.heading}>{props.politician.name} - {props.politician.position} </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <img src={props.politician.photo_url} class="Profile-image" alt="Profile image" height="300" width="300"/>

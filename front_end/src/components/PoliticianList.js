@@ -50,23 +50,15 @@ class PoliticianList extends Component {
   }
 
   render() {
-    if (this.state.isLoaded === false) {
-      return (
-        <div>
-          {this.pageHeader()}
-          <p>Loading...</p>
-        </div>
-      )
-    } else { 
-      return (
-        <div>
-          {this.pageHeader()}
-          <ul>
-            {this.displayPolitician(this.state.filteredPoliticianList)}
-          </ul>
-        </div>
-      )}
-    }
+    return (
+      <div>
+        {this.pageHeader()}
+        <ul>
+          {this.displayPolitician(this.state.filteredPoliticianList)}
+        </ul>
+      </div>
+    )
+  }
 }
 
 export default PoliticianList
