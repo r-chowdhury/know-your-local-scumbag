@@ -23,13 +23,15 @@ const Politician = (props) => {
     <div className={classes.root}>
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes.heading}>{props.politician.name} - {props.politician.position} </Typography>
+          <Typography className={classes.heading}>{props.politician.name} - {props.politician.position} </Typography> 
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
             <Typography>
-            <img src={props.politician.photo_url} class="Profile-image" alt="Profile image" height="300" width="300"/>
-              <li>Address: {props.politician.address}</li>
-              <li>Politicial Affiliation: {props.politician.party}</li>
+              <img src={props.politician.photo_url} class="Profile-image" alt="Profile image" height="300" width="auto"/>
+              <li><strong>Address:</strong> {props.politician.address !== "Unknown" ? <a href={props.politician.address_url} target="_blank">{props.politician.address}</a> : "Unknown"}</li>
+              <li><strong>Party:</strong> {props.politician.party}</li>
+              <li><strong>Website:</strong> {props.politician.website_url !== "Unknown" ? <a href={props.politician.website_url} target="_blank">{props.politician.website_url}</a> : "Unknown"}</li>
+              <li><strong>Website:</strong> {props.politician.phone_number !== "Unknown" ? props.politician.phone_number : "Unknown"}</li>
             </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>

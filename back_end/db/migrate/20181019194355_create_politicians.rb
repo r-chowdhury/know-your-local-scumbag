@@ -6,6 +6,9 @@ class CreatePoliticians < ActiveRecord::Migration[5.2]
       t.string :party
       t.string :photo_url 
       t.string :position
+      t.string :website
+      t.string :address_url
+      t.string :phone_number
 
 
       t.timestamps

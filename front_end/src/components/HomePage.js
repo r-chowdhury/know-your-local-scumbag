@@ -20,7 +20,6 @@ const styles = {
 };
 
 class HomePage extends Component {
-  
   render () {
     return (
       <div className={this.props.classes.root}>
@@ -33,6 +32,7 @@ class HomePage extends Component {
           <Button color="inherit" onClick={e => this.props.handleClick(e)}>Login</Button>
         </Toolbar>
       </AppBar>
+      <img src="https://www.kirbasinstitute.com/wp-content/uploads/2016/02/Politics-of-nature.jpg" height="1000px" width="1890x"/>
     </div>
   )}
 }

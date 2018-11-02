@@ -20,18 +20,15 @@ class PoliticianList extends Component {
     })
       .then(resp => resp.json())
       .then(data => {
-        console.log('IN LIST', localStorage.name, localStorage.user_id)
         let x = data.filter(user_politician => {
           return user_politician.user_id === parseInt(localStorage.user_id, 10)
         })
         
         this.setState({
-          filteredPoliticianList: x
+          filteredPoliticianList: x,
+          isLoaded: !this.state.isLoaded
         })
       })
-    this.setState({
-      isLoaded: !this.state.isLoaded
-    })
   }
   
   displayPolitician = (politicianList) => {

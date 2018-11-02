@@ -11,7 +11,6 @@ class App extends Component {
     this.state = {
       isLoggingIn: false,
       isSigningUp: false,
-      isLoggedIn: false,
     }
   }
 
@@ -20,12 +19,10 @@ class App extends Component {
       this.setState({
         isSigningUp: true,
         isLoggingIn: false,
-        isLoggedIn: false
       })
     } else {
       this.setState({
         isLoggingIn: true,
-        isLoggedIn: false,
         isSigningUp: false
       })
     }
@@ -36,14 +33,17 @@ class App extends Component {
       isLoggedIn: true,
       isLoggingIn: false
     })
+    localStorage.isLoggedOut = false
   }
 
   logOutClick = () => {
+    // localStorage.isLoggedOut = "true"
     this.setState({
       isLoggingIn: false,
       isSigningUp: false,
       isLoggedIn: false,
     })
+    localStorage.clear()
   }
 
   changeIsSignedUp = (name, id) => {
@@ -51,13 +51,14 @@ class App extends Component {
     localStorage.name = name
     this.setState({
       isSigningUp: false,
-      isLoggedIn: true
+      isLoggingIn: true
     })
 
   }
 
   render() {
-    if (this.state.isLoggingIn === false && this.state.isSigningUp === false && this.state.isLoggedIn === false) {
+    console.log(this.state)
+    if (this.state.isLoggingIn === false && this.state.isSigningUp === false && !localStorage.token) {
       return (
         <div>
           <HomePage handleClick={this.handleClick}/>
@@ -67,7 +68,7 @@ class App extends Component {
       return (<LoginPage changeLoginState={this.changeLoginState}/>)
     } else if (this.state.isSigningUp === true && this.state.isLoggingIn === false) {
       return (<SignUpPage changeIsSignedUp={this.changeIsSignedUp}/>)
-    } else if (this.state.isLoggedIn === true && !!localStorage.token === true)  {
+    } else if (!!localStorage.token === true)  {
       return (
         <div>
           <PoliticianListAppBar logOutClick={this.logOutClick}/>
