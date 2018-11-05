@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2018_10_19_194850) do
     t.string "website_url"
     t.string "address_url"
     t.string "phone_number"
+    t.integer "number_of_likes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

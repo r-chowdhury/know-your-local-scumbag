@@ -15,7 +15,8 @@ class App extends Component {
   }
 
   handleClick = (e) => {
-    if (e.target.innerHTML === "Create An Account") {
+    console.log(e.target.innerText)
+    if (e.target.innerText === "CREATE AN ACCOUNT") {
       this.setState({
         isSigningUp: true,
         isLoggingIn: false,
@@ -30,7 +31,6 @@ class App extends Component {
 
   changeLoginState = () => {
     this.setState({
-      isLoggedIn: true,
       isLoggingIn: false
     })
     localStorage.isLoggedOut = false
@@ -41,7 +41,6 @@ class App extends Component {
     this.setState({
       isLoggingIn: false,
       isSigningUp: false,
-      isLoggedIn: false,
     })
     localStorage.clear()
   }
@@ -51,14 +50,13 @@ class App extends Component {
     localStorage.name = name
     this.setState({
       isSigningUp: false,
-      isLoggingIn: true
+      isLoggingIn: false
     })
 
   }
 
   render() {
-    console.log(this.state)
-    if (this.state.isLoggingIn === false && this.state.isSigningUp === false && !localStorage.token) {
+    if (this.state.isLoggingIn === false && this.state.isSigningUp === false && !!localStorage.token === false) {
       return (
         <div>
           <HomePage handleClick={this.handleClick}/>

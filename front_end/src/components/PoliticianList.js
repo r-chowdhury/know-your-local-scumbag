@@ -1,7 +1,13 @@
 import React, { Component, Fragment } from 'react'
 import Politician from "./Politician"
+import WarpCable from 'warp-cable-client'
+
+const API_DOMAIN = 'http://localhost:3000/cable'
+let api = WarpCable(API_DOMAIN)
+window.api = api
 
 class PoliticianList extends Component {
+
    constructor() {
      super() 
      this.state = {
@@ -30,10 +36,17 @@ class PoliticianList extends Component {
         })
       })
   }
+
+  handleUpvote = e => {
+    console.log("hello")
+  }
+  handleDownvote = e => {
+    console.log("hello")
+  }
   
   displayPolitician = (politicianList) => {
     return politicianList.map(user_politician => {
-      return <Politician politician={user_politician.politician} user={user_politician.user}/>
+      return <Politician politician={user_politician.politician} user={user_politician.user} handleUpvote={this.handleUpvote} handleDownvote={this.handleDownvote} />
     })
   }
 
