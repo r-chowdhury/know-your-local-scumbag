@@ -4,7 +4,6 @@ import WarpCable from 'warp-cable-client'
 
 const API_DOMAIN = 'http://localhost:3000/cable'
 let api = WarpCable(API_DOMAIN)
-window.api = api
 
 class PoliticianList extends Component {
 
@@ -17,36 +16,34 @@ class PoliticianList extends Component {
    }
 
   componentDidMount = () => {
-    fetch("http://localhost:3000/user_politicians", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.token}`
-      }
-    })
-      .then(resp => resp.json())
-      .then(data => {
-        let x = data.filter(user_politician => {
-          return user_politician.user_id === parseInt(localStorage.user_id, 10)
-        })
+    // fetch("http://localhost:3000/user_politicians", {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "Authorization": `Bearer ${localStorage.token}`
+    //   }
+    // })
+    //   .then(resp => resp.json())
+    //   .then(data => {
+    //     let x = data.filter(user_politician => {
+    //       return user_politician.user_id === parseInt(localStorage.user_id, 10)
+    //     })
         
-        this.setState({
-          filteredPoliticianList: x,
-          isLoaded: !this.state.isLoaded
-        })
-      })
+    //     this.setState({
+    //       filteredPoliticianList: x,
+    //       isLoaded: !this.state.isLoaded
+    //     })
+    //   })
+    api.subscribe('Politicians', 'index', {}, politicians => console.log(politicians[0]))
   }
 
-  handleUpvote = e => {
-    console.log("hello")
-  }
-  handleDownvote = e => {
-    console.log("hello")
+  handleVoteButton = (politician, number_of_likes) => {
+      api.trigger('Politicians', 'update', { id:politician.id, number_of_likes })
   }
   
   displayPolitician = (politicianList) => {
-    return politicianList.map(user_politician => {
-      return <Politician politician={user_politician.politician} user={user_politician.user} handleUpvote={this.handleUpvote} handleDownvote={this.handleDownvote} />
+    return politicianList.map( ( { politician, user }) => {
+      return <Politician politician={politician} user={user} handleVoteButton={value => this.handleVoteButton(politician, value)} />
     })
   }
 

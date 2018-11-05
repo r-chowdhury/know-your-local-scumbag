@@ -1,15 +1,15 @@
 class PoliticiansWarpController < WarpCable::Controller
 
   def index(params)
-      Politician.after_create do
-          yield Politician.all
-      end
-      Politician.after_update do
-          yield Politician.all
-      end
-      Politician.after_destroy do
-          yield Politician.all
-      end
+    Politician.after_create do
+      yield Politician.all
+    end
+    Politician.after_update do
+      yield Politician.all
+    end
+    Politician.after_destroy do
+      yield Politician.all
+    end
       yield Politician.all
   end
 
@@ -24,8 +24,7 @@ class PoliticiansWarpController < WarpCable::Controller
   def update(params)
       politician = Politician.find(params[:id])
       politician.update(politician_params)
-      byebug
-      Politician.order(:id)
+      Politician.all.order(:id)
   end
 
   def politician_params

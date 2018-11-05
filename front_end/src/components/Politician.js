@@ -7,8 +7,8 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
 import Grid from '@material-ui/core/Grid';
+
 
 const styles = theme => ({
   root: {
@@ -22,6 +22,15 @@ const styles = theme => ({
 
 const Politician = (props) => {
   const { classes } = props;
+
+  // handleClick = e => {
+  //   if(this.state.positive){
+  //     props.handleVoteButton(props.politician.number_of_likes + 1)
+  //   } else {
+  //     props.handleVoteButton(props.politician.number_of_likes - 1)
+  //   }
+  // }
+
   return (
     <div className={classes.root}>
       <ExpansionPanel>
@@ -31,15 +40,26 @@ const Politician = (props) => {
         <ExpansionPanelDetails>
             <Grid container spacing={12} >
               <Grid item xs={1}>
-                <Button variant="fab" color="primary" aria-label="Add" className={classes.button} onClick={props.handleUpvote}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z" /></svg>		
+
+              <div className="upvote">
+                <Button variant="fab" color="primary" aria-label="Add" className={classes.button} onClick={e => props.handleVoteButton(props.politician.number_of_likes + 1)}>
+                  <div className="upvote">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="upvote"><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z" /></svg>
+                  </div>
                 </Button>
+              </div>
+
                   <br/>
                     {props.politician.number_of_likes}
                   <br/>
-                <Button variant="fab" color="secondary" aria-label="Edit" className={classes.button} onClick={props.handleDownvote} >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#010101" d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z" /></svg>								
+
+              <div className="downvote">  
+                <Button variant="fab" color="secondary" aria-label="Edit" className={classes.button} onClick={props.handleVoteButton(props.politician.number_of_likes - 1)} >
+                <div className="downvote">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="downvote" width="24" height="24" viewBox="0 0 24 24"><path fill="#010101" d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z" /></svg>		
+                </div>					
                 </Button>
+              </div> 
             </Grid>
             <Grid item xs={11}>
                 <Grid container spacing={12} >
