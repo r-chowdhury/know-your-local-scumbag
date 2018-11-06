@@ -1,16 +1,17 @@
-class PoliticiansWarpController < WarpCable::Controller
+class PoliticiansWarpController < ApplicationWarpController
 
   def index(params)
+    user = current_user
     Politician.after_create do
-      yield Politician.all
+      yield user.politicians.order(:id).reload
     end
     Politician.after_update do
-      yield Politician.all
+      yield user.politicians.order(:id).reload
     end
     Politician.after_destroy do
-      yield Politician.all
+      yield user.politicians.order(:id).reload
     end
-      yield Politician.all
+    yield current_user.politicians.order(:id).reload
   end
 
   def create(params)
