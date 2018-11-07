@@ -48,9 +48,6 @@ class PoliticianList extends Component {
       })
       x.downvote_toggled = false
       x.upvote_toggled = true
-    } else {
-      x.upvote_toggled = true 
-      x.downvote_toggled = false
       fetch(`http://localhost:3000/user_politicians/${x.id}`, {
         method: "PUT",
         headers: {
