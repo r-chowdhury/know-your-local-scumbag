@@ -26,7 +26,7 @@ class HomePage extends Component {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" color="inherit" className={this.props.classes.grow}>
-            Welcome to Know Your Local Scumbag
+            Welcome to Publicum Peritus
           </Typography>
           <Button color="inherit" onClick={e => this.props.handleClick(e)}>Create An Account</Button>
           <Button color="inherit" onClick={e => this.props.handleClick(e)}>Login</Button>

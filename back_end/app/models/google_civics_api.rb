@@ -51,7 +51,7 @@ class GoogleCivicsApi
       party: politician_object["party"] ? politician_object["party"] : "Unknown",
       photo_url: politician_object["photoUrl"] ? politician_object["photoUrl"] : "https://a-z-animals.com/media/animals/images/470x370/giraffe_10.jpg",
       position: office["name"],
-      website_url: politician_object["urls"] ? politician_object["urls"][0] : "Unknown",
+      website: politician_object["urls"] ? politician_object["urls"][0] : "Unknown",
       address_url: politician_object["address"] ? self.create_address_url(politician_object["address"]) : "Unknown",
       phone_number: politician_object["phones"] ? politician_object["phones"][0] : "Unknown",
       # number_of_likes: 0
