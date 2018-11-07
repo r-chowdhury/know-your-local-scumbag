@@ -18,10 +18,6 @@ class PoliticiansWarpController < ApplicationWarpController
       Politician.create(politician_params)
   end
 
-  def destroy(params)
-      Politician.destroy(params[:id])
-  end
-
   def update(params)
       politician = Politician.find(params[:id])
       politician.update(politician_params)

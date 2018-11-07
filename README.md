@@ -1,2 +1,2 @@
-# know-your-local-scumbag
+# publicum-peritus
 Mod 5 final project
