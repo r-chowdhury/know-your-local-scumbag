@@ -24,19 +24,12 @@ class PoliticianList extends Component {
   }
 
   handleVoteButton = (name, politician, number_of_likes) => {
-    if (true) {
-      api.trigger('Politicians', 'update', {
-        id: politician.id,
-        number_of_likes,
-        'Authorization': `Bearer ${localStorage.token}`
-      })
-    }
-    else { 
-      debugger
-      localStorage.votedPoliticians = JSON.stringify({
-        [name]: {[politician.name]: false}
-      })
-    }
+    api.trigger('Politicians', 'update', {
+      id: politician.id,
+      number_of_likes,
+      'Authorization': `Bearer ${localStorage.token}`
+    })
+     
   }
   
   displayPolitician = (politicianList) => {
