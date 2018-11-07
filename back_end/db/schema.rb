@@ -21,9 +21,10 @@ ActiveRecord::Schema.define(version: 2018_10_19_194850) do
     t.string "party"
     t.string "photo_url"
     t.string "position"
-    t.string "website_url"
+    t.string "website"
     t.string "address_url"
     t.string "phone_number"
+    t.integer "number_of_likes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -31,6 +32,8 @@ ActiveRecord::Schema.define(version: 2018_10_19_194850) do
   create_table "user_politicians", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "politician_id"
+    t.boolean "upvote_toggled", default: false
+    t.boolean "downvote_toggled", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["politician_id"], name: "index_user_politicians_on_politician_id"

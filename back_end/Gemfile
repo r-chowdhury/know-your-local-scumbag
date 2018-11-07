@@ -10,6 +10,7 @@ gem 'pg'
 gem 'rails_12factor', group: :production
 gem 'rack-cors'
 gem 'active_model_serializers'
+gem "warp-cable", git: "https://github.com/Joshua-Miles/warp-cable.git"
 
 
 

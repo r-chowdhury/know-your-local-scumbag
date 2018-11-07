@@ -26,7 +26,7 @@ class PoliticianListAppBar extends Component {
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" color="inherit" className={this.props.classes.grow}>
-              Welcome to Know Your Local Scumbag
+              Welcome to Publicum Peritus
           </Typography>
             <Button color="inherit" onClick={this.props.logOutClick}>Logout</Button>
           </Toolbar>

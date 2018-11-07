@@ -1,0 +1,2 @@
+module PoliticianswarpHelper
+end

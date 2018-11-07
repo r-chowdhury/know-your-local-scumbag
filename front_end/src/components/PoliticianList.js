@@ -1,39 +1,47 @@
 import React, { Component, Fragment } from 'react'
 import Politician from "./Politician"
+import WarpCable from 'warp-cable-client'
+
+const API_DOMAIN = `http://localhost:3000/cable`
+let api = WarpCable(API_DOMAIN)
 
 class PoliticianList extends Component {
-   constructor() {
-     super() 
-     this.state = {
-       filteredPoliticianList: [],
-       isLoaded: false
-     }
-   }
+  constructor() {
+    super() 
+    this.state = {
+      filteredPoliticianList: [],
+      isLoaded: false
+    }
+  }
 
   componentDidMount = () => {
-    fetch("http://localhost:3000/user_politicians", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.token}`
-      }
+    api.subscribe('Politicians', 'index', {
+      'Authorization':`Bearer ${localStorage.token}`
+    }, politicians => {
+      console.log(politicians)
+      this.setState({ filteredPoliticianList: politicians})
     })
-      .then(resp => resp.json())
-      .then(data => {
-        let x = data.filter(user_politician => {
-          return user_politician.user_id === parseInt(localStorage.user_id, 10)
-        })
-        
-        this.setState({
-          filteredPoliticianList: x,
-          isLoaded: !this.state.isLoaded
-        })
+  }
+
+  handleVoteButton = (name, politician, number_of_likes) => {
+    if (true) {
+      api.trigger('Politicians', 'update', {
+        id: politician.id,
+        number_of_likes,
+        'Authorization': `Bearer ${localStorage.token}`
       })
+    }
+    else { 
+      debugger
+      localStorage.votedPoliticians = JSON.stringify({
+        [name]: {[politician.name]: false}
+      })
+    }
   }
   
   displayPolitician = (politicianList) => {
-    return politicianList.map(user_politician => {
-      return <Politician politician={user_politician.politician} user={user_politician.user}/>
+    return politicianList.map( ( politician ) => {
+      return <Politician politician={politician}  handleVoteButton={this.handleVoteButton} />
     })
   }
 
