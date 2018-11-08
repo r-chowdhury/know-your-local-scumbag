@@ -8,9 +8,10 @@
   text-align: center
 }
 
-#downvote {
-    margin: 0;
-    top: 50%;
-    -ms-transform: translateY(50%);
-    transform: translateY(50%);
+#votes {
+  transform: translate(0, 50%)
+}
+
+#counter {
+  transform: translate(21%, 0)
 }

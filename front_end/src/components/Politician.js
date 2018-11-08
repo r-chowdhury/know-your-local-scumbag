@@ -58,17 +58,18 @@ class Politician extends React.Component {
           <Typography className={this.props.classes.heading}>{this.props.politician.name} - {this.props.politician.position} </Typography> 
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-            <Grid container spacing={12} >
-              <Grid item xs={1}>
-                {this.upvoteLayout()}
-                  <br/>
-                    {this.props.politician.number_of_likes === null ? 0 : this.props.politician.number_of_likes}
-                  <br/>
-                {this.downvoteLayout()}
-            </Grid>
-            <Grid item xs={11}>
+            <Grid id="button-area" container spacing={12} >
+              
+              <Grid item xs={12}>
                 <Grid container spacing={12} >
-                  <Grid className="picture" item xs={12} >
+                  <Grid item xs={1}>
+                    <div id="votes">
+                      {this.upvoteLayout()}
+                      <h3 id="counter"> {this.props.politician.number_of_likes === null ? 0 : this.props.politician.number_of_likes} </h3>
+                      {this.downvoteLayout()}
+                    </div>
+                  </Grid>
+                  <Grid className="picture" item xs={11} >
                     <img src={this.props.politician.photo_url} className="Profile-image" alt="Profile image" height="300" width="auto" />
                   </Grid>
                   <Grid item xs={12}>
