@@ -1,44 +1,22 @@
 import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-
-const styles = {
-  root: {
-    flexGrow: 1,
-  },
-  grow: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-};
+import homePageStyles from "../styles/HomePage.css"
 
 class HomePage extends Component {
   render () {
     return (
-      <div className={this.props.classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" color="inherit" className={this.props.classes.grow}>
-            Welcome to Publicum Peritus
-          </Typography>
-          <Button color="inherit" onClick={e => this.props.handleClick(e)}>Create An Account</Button>
-          <Button color="inherit" onClick={e => this.props.handleClick(e)}>Login</Button>
-        </Toolbar>
-      </AppBar>
-      <img src="https://www.kirbasinstitute.com/wp-content/uploads/2016/02/Politics-of-nature.jpg" height="1000px" width="1890x"/>
+      <div style={{height:`${window.innerHeight}px`}}>
+        <section id="banner" style={{ height: '100%' }}>
+          <div style={{transform: 'translate(0,50%)'}}>
+          <h2>Publicum Peritus</h2>
+          <p>Sign up today to see who represents you!</p>
+          <div className="actions">
+            <a href="#" className="button" onClick={e => this.props.handleClick(e)}>Create An Account</a>
+            <a href="#" className="button" onClick={e => this.props.handleClick(e)}>Sign In</a>
+          </div>
+          </div>
+        </section>
     </div>
   )}
 }
 
-HomePage.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(HomePage);
+export default HomePage
