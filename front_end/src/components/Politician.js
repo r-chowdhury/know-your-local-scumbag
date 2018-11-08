@@ -61,7 +61,7 @@ class Politician extends React.Component {
               <Grid item xs={1}>
                 {this.upvoteLayout()}
                   <br/>
-                    {this.props.politician.number_of_likes}
+                    {this.props.politician.number_of_likes === null ? 0 : this.props.politician.number_of_likes}
                   <br/>
                 {this.downvoteLayout()}
             </Grid>
