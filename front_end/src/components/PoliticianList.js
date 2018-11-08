@@ -4,7 +4,6 @@ import WarpCable from 'warp-cable-client'
 
 const API_DOMAIN = `http://localhost:3000/cable`
 let api = WarpCable(API_DOMAIN)
-
 class PoliticianList extends Component {
   constructor() {
     super() 
@@ -14,6 +13,7 @@ class PoliticianList extends Component {
       userPoliticians: []
     }
   }
+  
 
   componentDidMount = () => {
     api.subscribe('Politicians', 'index', {
@@ -33,42 +33,52 @@ class PoliticianList extends Component {
           userPoliticians: data
         })
       })
-      .then(() => console.log(this.state))
   }
   
   handleUpvoteButton = (politician, number_of_likes) => {
     const x = this.state.userPoliticians.filter(userPolitician => {
       return (userPolitician.user_id === parseInt(localStorage.user_id, 10) && userPolitician.politician_id === politician.id)
     })[0]
-    if (x.upvote_toggled === false) {
+    if (x.upvote_toggled === false && x.downvote_toggled === false) {
       api.trigger('Politicians', 'update', {
         id: politician.id,
         number_of_likes,
         'Authorization': `Bearer ${localStorage.token}`
       })
-      x.downvote_toggled = false
       x.upvote_toggled = true
-      fetch(`http://localhost:3000/user_politicians/${x.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          'Authorization': 'Bearer ' + localStorage.token
-        },
-        body: JSON.stringify({
-          user_politician: {
-            upvote_toggled: x.upvote_toggled,
-            downvote_toggled: x.downvote_toggled
-          }
-        })
+    } else if (x.upvote_toggled === false && x.downvote_toggled === true) {
+      number_of_likes+=1
+      api.trigger('Politicians', 'update', {
+        id: politician.id,
+        number_of_likes,
+        'Authorization': `Bearer ${localStorage.token}`
       })
+      x.upvote_toggled = true 
+      x.downvote_toggled = false
     }
+    fetch(`http://localhost:3000/user_politicians/${x.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': 'Bearer ' + localStorage.token
+      },
+      body: JSON.stringify({
+        user_politician: {
+          upvote_toggled: x.upvote_toggled,
+          downvote_toggled: x.downvote_toggled
+        }
+      })
+    })
+    .then(resp => resp.json())
+    .then(data => console.log(data))
+    
   }
 
   handleDownvoteButton = (politician, number_of_likes) => {
     const x = this.state.userPoliticians.filter(userPolitician => {
       return (userPolitician.user_id === parseInt(localStorage.user_id, 10) && userPolitician.politician_id === politician.id)
     })[0]
-    if (x.downvote_toggled === false) {
+    if (x.downvote_toggled === false && x.upvote_toggled === false) {
       api.trigger('Politicians', 'update', {
         id: politician.id,
         number_of_likes,
@@ -76,23 +86,32 @@ class PoliticianList extends Component {
       })
       x.downvote_toggled = true
       x.upvote_toggled = false
-    } else {
-      x.downvote_toggled = true
-      x.upvote_toggled = false
-      fetch(`http://localhost:3000/user_politicians/${x.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          'Authorization': 'Bearer ' + localStorage.token
-        },
-        body: JSON.stringify({
-          user_politician: {
-            upvote_toggled: x.upvote_toggled,
-            downvote_toggled: x.downvote_toggled
-          }
-        })
+    } else if (x.downvote_toggled === false && x.upvote_toggled === true) {
+      number_of_likes -= 1
+      api.trigger('Politicians', 'update', {
+        id: politician.id,
+        number_of_likes,
+        'Authorization': `Bearer ${localStorage.token}`
       })
+      x.upvote_toggled = false
+      x.downvote_toggled = true
     }
+    fetch(`http://localhost:3000/user_politicians/${x.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': 'Bearer ' + localStorage.token
+      },
+      body: JSON.stringify({
+        user_politician: {
+          upvote_toggled: x.upvote_toggled,
+          downvote_toggled: x.downvote_toggled
+        }
+      })
+    })
+    .then(resp => resp.json())
+    .then(data => console.log(data))
+
   }
   
   displayPolitician = (politicianList) => {

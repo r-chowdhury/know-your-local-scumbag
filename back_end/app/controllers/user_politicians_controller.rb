@@ -8,7 +8,7 @@ class UserPoliticiansController < ApplicationController
   def update
     user_politician = UserPolitician.find(params[:id])
     user_politician.update(user_politicians_params) 
-    render json: {success: true}
+    render json: {success: true, user_politician: user_politician}
   end 
 
   private
