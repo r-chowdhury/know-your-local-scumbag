@@ -1,9 +1,12 @@
 import React, { Component, Fragment } from 'react'
 import Politician from "./Politician"
 import WarpCable from 'warp-cable-client'
+import politicianListStyles from "../styles/PoliticianList.css"
+
 
 const API_DOMAIN = `http://localhost:3000/cable`
 let api = WarpCable(API_DOMAIN)
+
 class PoliticianList extends Component {
   constructor() {
     super() 
@@ -133,7 +136,7 @@ class PoliticianList extends Component {
     return (
       <div>
         {this.pageHeader()}
-        <ul>
+        <ul id="list_1">
           {this.displayPolitician(this.state.filteredPoliticianList)}
         </ul>
       </div>

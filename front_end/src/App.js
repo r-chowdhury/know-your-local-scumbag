@@ -15,8 +15,7 @@ class App extends Component {
   }
 
   handleClick = (e) => {
-    console.log(e.target.innerText)
-    if (e.target.innerText === "CREATE AN ACCOUNT") {
+    if (e.target.innerText === "Create An Account") {
       this.setState({
         isSigningUp: true,
         isLoggingIn: false,
